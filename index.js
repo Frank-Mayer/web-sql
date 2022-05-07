@@ -1,7 +1,9 @@
 "use strict";
 
 if (!openDatabase) {
-  alert("Your browser doesn't support WebSQL");
+  const msg = "Your browser doesn't support WebSQL";
+  alert(msg);
+  throw new Error(msg);
 }
 
 /**
@@ -114,3 +116,5 @@ const run = (script) => {
     }
   }, errorHandler);
 };
+
+triggerRun();
