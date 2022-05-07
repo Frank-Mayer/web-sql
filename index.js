@@ -62,10 +62,11 @@ const triggerRun = () => {
  */
 const run = (script) => {
   outputEl.innerHTML = "";
+
   db.transaction((tx) => {
     let first = true;
 
-    for (const query of script.split(";")) {
+    for (const query of script.replace(/^--.+$/gm, "").split(";")) {
       if (query.trim().length === 0) {
         continue;
       }
@@ -80,6 +81,7 @@ const run = (script) => {
           first = false;
 
           const affectedRowsEl = document.createElement("span");
+          console.info(rs);
           affectedRowsEl.innerText = `${rs.rows.length} rows affected`;
           outputEl.appendChild(affectedRowsEl);
 
